@@ -27,8 +27,11 @@ def get_stimulus_for_series(pul, pgf, group_idx, series_idx, experimental_mode, 
 
     data = create_stimulus_waveform_from_segments(segments, info)
 
-    if not check_data(data, pul_sweep, num_sweeps_in_recorded_data):
-        return False
+    # If stDataStartTime has been set for the measurement, unequal sizes for data and stimulus will occur,
+    # resulting in check_data to return False.
+    # I will temporarily deactivate this check and let the caller handle unequal sizes for stimulus and data.
+    #if not check_data(data, pul_sweep, num_sweeps_in_recorded_data):
+    #    return False
 
     info["data"] = data
 
